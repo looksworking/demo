@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Inventory Management System</title>
+</head>
+<body>
+    <h2>Search for products</h2>
+
+    <form th:action="@{/search/}" method="post">
+        <input type="text" name="search" id="search" th:value="${search}"/>
+        <input type="submit" value="Search"/>
+    </form>
+
+    <form th:action="@{/add}">
+        <button type="submit" value="Add new product">Add</button>
+    </form>
+
+    <div th:if="${products != null}">
+        <h1>Products</h1>
+            <th:block th:object="${products}">
+                <table class="table table-striped">
+                <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+                </tr>
+                <tr th:each="product: ${products}">
+                <td> <a th:href="@{'/edit/' + ${product.productId}}"> <div th:text="${product.name}"/> </a> </td>
+                <td th:text="${product.brand}">brand</td>
+                <td th:text="${product.quantity}">quantity</td>
+                <td th:text="${product.price}">price</td>
+                <td>
+                    <form th:action="@{'/delete/' + ${product.productId}}" method="get">
+                    <button type="submit"><i>Delete</i></button>
+                    </form>
+                </td>
+                </tr>
+                </table>
+            </th:block>
+    </div>
+</body>
+</html>

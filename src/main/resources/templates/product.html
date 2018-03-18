@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit product</title>
+</head>
+<body>
+<div th:if="${product.productId != null}">
+
+<h2>Edit product</h2>
+<a th:href="@{'/'}">Back</a>
+<form th:object="${product}" th:action="@{'/edit/'}" method="post">
+<input type="text" th:field="*{productId}" hidden>
+<th>Name</th><input type="text" th:field="*{name}" readonly/><br>
+<th>Brand</th><input type="text" th:field="*{brand}" readonly/><br>
+<th>Qty</th><input type="number" th:field="*{quantity}" /><br>
+<th>Price</th><input type="number" step="any" th:field="*{price}" /><br>
+<button th:type="submit">Save</button>
+
+</form>
+</div>
+<div th:if="${product.productId == null}">
+
+<h2>Edit product</h2>
+<a th:href="@{'/'}">Back</a>
+<form th:object="${product}" th:action="@{'/add/'}" method="post">
+<th>Name</th><input type="text" th:field="*{name}" /><br>
+<th>Brand</th><input type="text" th:field="*{brand}" /><br>
+<th>Qty</th><input type="number" th:field="*{quantity}" /><br>
+<th>Price</th><input type="number" step="any" th:field="*{price}" /><br>
+<button th:type="submit">Save</button>
+
+</form>
+</div>
+</body>
+</html>
